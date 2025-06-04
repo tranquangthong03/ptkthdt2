@@ -84,7 +84,7 @@ async Task SeedRolesAndAdminAsync(IServiceProvider serviceProvider)
     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
     // Create roles
-    string[] roleNames = { "Admin", "Student" };
+    string[] roleNames = { "Admin", "Student", "Teacher", "Sponsor" };
     foreach (var roleName in roleNames)
     {
         var roleExist = await roleManager.RoleExistsAsync(roleName);
