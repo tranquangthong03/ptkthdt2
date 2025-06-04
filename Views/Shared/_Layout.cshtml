@@ -99,6 +99,16 @@
                                         <i class="fas fa-user-plus"></i> Tạo tài khoản SV
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="CreateTeacherAccount">
+                                        <i class="fas fa-chalkboard-teacher"></i> Tạo tài khoản GV
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="CreateSponsorAccount">
+                                        <i class="fas fa-hand-holding-usd"></i> Tạo tài khoản NT
+                                    </a>
+                                </li>
                             }
                             else if (User.IsInRole("Student"))
                             {

@@ -269,5 +269,109 @@ namespace UTEScholarshipSystem.Controllers
 
             ViewBag.Students = studentsWithoutAccounts;
         }
+
+        // GET: Account/CreateSponsorAccount
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreateSponsorAccount()
+        {
+            return View(new CreateSponsorAccountViewModel());
+        }
+
+        // POST: Account/CreateSponsorAccount
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateSponsorAccount(CreateSponsorAccountViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingUser = await _userManager.FindByNameAsync(model.UserName);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("UserName", "Tên đăng nhập đã tồn tại.");
+                    return View(model);
+                }
+                existingUser = await _userManager.FindByEmailAsync(model.Email);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("Email", "Email đã được sử dụng.");
+                    return View(model);
+                }
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    FullName = model.FullName,
+                    EmailConfirmed = true,
+                    IsActive = true
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Sponsor");
+                    TempData["SuccessMessage"] = $"Tạo tài khoản nhà tài trợ {model.FullName} thành công.";
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View(model);
+        }
+
+        // GET: Account/CreateTeacherAccount
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreateTeacherAccount()
+        {
+            return View(new CreateTeacherAccountViewModel());
+        }
+
+        // POST: Account/CreateTeacherAccount
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateTeacherAccount(CreateTeacherAccountViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingUser = await _userManager.FindByNameAsync(model.UserName);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("UserName", "Tên đăng nhập đã tồn tại.");
+                    return View(model);
+                }
+                existingUser = await _userManager.FindByEmailAsync(model.Email);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("Email", "Email đã được sử dụng.");
+                    return View(model);
+                }
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    FullName = model.FullName,
+                    EmailConfirmed = true,
+                    IsActive = true
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Teacher");
+                    TempData["SuccessMessage"] = $"Tạo tài khoản giáo viên {model.FullName} thành công.";
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View(model);
+        }
     }
-} 
+}
