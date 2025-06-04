@@ -1,0 +1,202 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@if (User.IsInRole("Student"))
+{
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card bg-primary text-white">
+                    <div class="card-body text-center py-5">
+                        <h1 class="display-4 mb-3">
+                            <i class="fas fa-graduation-cap"></i>
+                            Hệ thống Học bổng UTE
+                        </h1>
+                        <p class="lead">Chào mừng bạn đến với hệ thống học bổng sinh viên UTE!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 border-info">
+                    <div class="card-body text-center">
+                        <i class="fas fa-list-alt fa-3x text-info mb-3"></i>
+                        <h5 class="card-title">Học bổng đang mở</h5>
+                        <p class="card-text">Xem và đăng ký các học bổng phù hợp với bạn</p>
+                        <a asp-controller="Scholarships" asp-action="Available" class="btn btn-info">
+                            <i class="fas fa-arrow-right"></i> Xem ngay
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 border-warning">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-alt fa-3x text-warning mb-3"></i>
+                        <h5 class="card-title">Đơn của tôi</h5>
+                        <p class="card-text">Theo dõi tiến trình các đơn xin học bổng của bạn</p>
+                        <a asp-controller="Student" asp-action="MyApplications" class="btn btn-warning">
+                            <i class="fas fa-arrow-right"></i> Xem danh sách
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-4"><i class="fas fa-star"></i> Tính năng nổi bật</h3>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-search text-primary"></i>
+                            Tìm kiếm học bổng
+                        </h5>
+                        <p class="card-text">
+                            Dễ dàng tìm kiếm và lọc các học bổng phù hợp với tiêu chí của bạn.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-history text-success"></i>
+                            Theo dõi tiến trình
+                        </h5>
+                        <p class="card-text">
+                            Xem trạng thái xét duyệt và kết quả các đơn học bổng bạn đã nộp.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card bg-primary text-white">
+                    <div class="card-body text-center py-5">
+                        <h1 class="display-4 mb-3">
+                            <i class="fas fa-graduation-cap"></i>
+                            Hệ thống Quản lý Học bổng UTE
+                        </h1>
+                        <p class="lead">
+                            Quản lý học bổng sinh viên một cách hiệu quả và minh bạch
+                        </p>
+                        <p class="mb-0">
+                            <i class="fas fa-university"></i>
+                            Trường Đại học Sư phạm Kỹ thuật TP.HCM
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mb-5">
+            <div class="col-md-3 mb-3">
+                <div class="card h-100 border-primary">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Quản lý Sinh viên</h5>
+                        <p class="card-text">Thêm, sửa, xóa thông tin sinh viên</p>
+                        <a asp-controller="Students" asp-action="Index" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i> Xem danh sách
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card h-100 border-success">
+                    <div class="card-body text-center">
+                        <i class="fas fa-graduation-cap fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Quản lý Học bổng</h5>
+                        <p class="card-text">Tạo và quản lý các chương trình học bổng</p>
+                        <a asp-controller="Scholarships" asp-action="Index" class="btn btn-success">
+                            <i class="fas fa-arrow-right"></i> Xem danh sách
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card h-100 border-info">
+                    <div class="card-body text-center">
+                        <i class="fas fa-list-alt fa-3x text-info mb-3"></i>
+                        <h5 class="card-title">Học bổng Đang mở</h5>
+                        <p class="card-text">Xem các học bổng đang nhận hồ sơ</p>
+                        <a asp-controller="Scholarships" asp-action="Available" class="btn btn-info">
+                            <i class="fas fa-arrow-right"></i> Xem ngay
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card h-100 border-warning">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-alt fa-3x text-warning mb-3"></i>
+                        <h5 class="card-title">Đơn Xin Học bổng</h5>
+                        <p class="card-text">Quản lý hồ sơ xin học bổng</p>
+                        <a href="#" class="btn btn-warning">
+                            <i class="fas fa-arrow-right"></i> Xem danh sách
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-4"><i class="fas fa-star"></i> Tính năng nổi bật</h3>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-database text-primary"></i>
+                            Quản lý Dữ liệu
+                        </h5>
+                        <p class="card-text">
+                            Lưu trữ và quản lý thông tin sinh viên, học bổng một cách có hệ thống và bảo mật.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-chart-line text-success"></i>
+                            Báo cáo & Thống kê
+                        </h5>
+                        <p class="card-text">
+                            Tạo báo cáo chi tiết về tình hình cấp học bổng và hiệu quả chương trình.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-shield-alt text-warning"></i>
+                            Bảo mật & Minh bạch
+                        </h5>
+                        <p class="card-text">
+                            Đảm bảo tính minh bạch trong quá trình xét duyệt và cấp học bổng.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

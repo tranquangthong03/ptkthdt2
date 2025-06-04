@@ -1,0 +1,85 @@
+@model UTEScholarshipSystem.Models.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Đăng nhập hệ thống
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="UserName" class="form-label">
+                                <i class="fas fa-user"></i> @Html.DisplayNameFor(m => m.UserName)
+                            </label>
+                            <input asp-for="UserName" class="form-control" placeholder="Nhập tên đăng nhập hoặc mã sinh viên" autofocus />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                            <small class="form-text text-muted">Sinh viên: Sử dụng mã sinh viên làm tên đăng nhập</small>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="form-label">
+                                <i class="fas fa-lock"></i> @Html.DisplayNameFor(m => m.Password)
+                            </label>
+                            <input asp-for="Password" class="form-control" placeholder="Nhập mật khẩu" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input asp-for="RememberMe" class="form-check-input" />
+                            <label asp-for="RememberMe" class="form-check-label">
+                                @Html.DisplayNameFor(m => m.RememberMe)
+                            </label>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center text-muted">
+                    <small>
+                        <i class="fas fa-info-circle"></i>
+                        Liên hệ quản trị viên nếu bạn quên mật khẩu
+                    </small>
+                </div>
+            </div>
+
+            <!-- Demo accounts info -->
+            <div class="card mt-3">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-info-circle"></i>
+                        Tài khoản demo
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2"><strong>Quản trị viên:</strong></p>
+                    <p class="mb-1">Tên đăng nhập: <code>admin</code></p>
+                    <p class="mb-3">Mật khẩu: <code>Admin@123</code></p>
+                    
+                    <p class="mb-2"><strong>Sinh viên:</strong></p>
+                    <p class="mb-1">Tên đăng nhập: <code>[Mã sinh viên]</code></p>
+                    <p class="mb-0">Mật khẩu: <em>Do quản trị viên cấp</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

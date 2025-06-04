@@ -1,0 +1,76 @@
+@model IEnumerable<UTEScholarshipSystem.Models.Scholarship>
+@{
+    ViewData["Title"] = "Tìm kiếm & Lọc học bổng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <h1 class="mb-4"><i class="fas fa-search"></i> Tìm kiếm & Lọc học bổng</h1>
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <form method="get" asp-action="Search" class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <label class="form-label">Ngành học / Từ khóa</label>
+                    <input type="text" name="major" value="@ViewBag.Major" class="form-control" placeholder="Nhập ngành học hoặc từ khóa..." />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Giá trị từ (VNĐ)</label>
+                    <input type="number" name="minAmount" value="@ViewBag.MinAmount" class="form-control" min="0" step="100000" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Đến (VNĐ)</label>
+                    <input type="number" name="maxAmount" value="@ViewBag.MaxAmount" class="form-control" min="0" step="100000" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Từ ngày</label>
+                    <input type="date" name="startDate" value="@(ViewBag.StartDate != null ? ((DateTime)ViewBag.StartDate).ToString("yyyy-MM-dd") : "")" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Đến ngày</label>
+                    <input type="date" name="endDate" value="@(ViewBag.EndDate != null ? ((DateTime)ViewBag.EndDate).ToString("yyyy-MM-dd") : "")" class="form-control" />
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">GPA tối thiểu</label>
+                    <input type="number" name="minGPA" value="@ViewBag.MinGPA" class="form-control" min="0" max="4" step="0.01" />
+                </div>
+                <div class="col-md-12 text-end mt-3">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            @if (Model.Any())
+            {
+                <div class="row">
+                    @foreach (var scholarship in Model)
+                    {
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100 border-primary">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">@scholarship.Name</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Mô tả:</strong> @scholarship.Description</p>
+                                    <p><strong>Giá trị:</strong> @string.Format("{0:N0}", scholarship.Amount) VNĐ</p>
+                                    <p><strong>Yêu cầu GPA:</strong> @scholarship.MinGPA</p>
+                                    <p><strong>Số lượng:</strong> @scholarship.Quantity</p>
+                                    <p><strong>Hạn nộp:</strong> @scholarship.ApplicationEndDate.ToString("dd/MM/yyyy")</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a asp-controller="Scholarships" asp-action="Details" asp-route-id="@scholarship.ScholarshipId" class="btn btn-outline-primary w-100">
+                                        <i class="fas fa-eye"></i> Xem chi tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> Không tìm thấy học bổng phù hợp với tiêu chí tìm kiếm.
+                </div>
+            }
+        </div>
+    </div>
+</div> 

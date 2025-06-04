@@ -1,0 +1,142 @@
+@model UTEScholarshipSystem.Models.ScholarshipApplication
+
+@{
+    ViewData["Title"] = "Chi tiết đơn xin học bổng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mb-4">
+        <i class="fas fa-file-alt"></i> Chi tiết đơn xin học bổng
+    </h1>
+
+    <div class="card">
+        <div class="card-header bg-light">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Thông tin đơn</h5>
+                <div>
+                    <a asp-action="MyApplications" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Quay lại
+                    </a>
+                    @if (Model.Status == ApplicationStatus.Pending)
+                    {
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">
+                            <i class="fas fa-times"></i> Hủy đơn
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="border-bottom pb-2 mb-3">Thông tin học bổng</h6>
+                    <p><strong>Tên học bổng:</strong> @Model.Scholarship.Name</p>
+                    <p><strong>Mô tả:</strong> @Model.Scholarship.Description</p>
+                    <p><strong>Giá trị:</strong> @string.Format("{0:N0}", Model.Scholarship.Amount) VNĐ</p>
+                    <p><strong>Số lượng:</strong> @Model.Scholarship.Quantity</p>
+                    <p><strong>Yêu cầu GPA:</strong> <span class="badge bg-primary">@Model.Scholarship.MinGPA</span></p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="border-bottom pb-2 mb-3">Thông tin đơn</h6>
+                    <p><strong>Mã đơn:</strong> #@Model.ApplicationId</p>
+                    <p><strong>Ngày nộp:</strong> @Model.ApplicationDate.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p>
+                        <strong>Trạng thái:</strong>
+                        @switch (Model.Status)
+                        {
+                            case ApplicationStatus.Pending:
+                                <span class="badge bg-warning">Chờ duyệt</span>
+                                break;
+                            case ApplicationStatus.Approved:
+                                <span class="badge bg-success">Đã duyệt</span>
+                                break;
+                            case ApplicationStatus.Rejected:
+                                <span class="badge bg-danger">Từ chối</span>
+                                break;
+                            default:
+                                <span class="badge bg-secondary">Không xác định</span>
+                                break;
+                        }
+                    </p>
+                    @if (Model.Status != ApplicationStatus.Pending)
+                    {
+                        <p><strong>Ngày duyệt:</strong> @(Model.ReviewDate.HasValue ? Model.ReviewDate.Value.ToString("dd/MM/yyyy HH:mm") : "N/A")</p>
+                        <p><strong>Người duyệt:</strong> @(string.IsNullOrEmpty(Model.ReviewedBy) ? "N/A" : Model.ReviewedBy)</p>
+                    }
+                    <p><strong>GPA khi nộp đơn:</strong> @Model.GPAAtApplication</p>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h6 class="border-bottom pb-2 mb-3">Lý do xin học bổng</h6>
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <p>@Model.ApplicationReason</p>
+                    </div>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.ReviewNotes) && Model.Status != ApplicationStatus.Pending)
+            {
+                <div class="mt-4">
+                    <h6 class="border-bottom pb-2 mb-3">Đánh giá từ ban xét duyệt</h6>
+                    <div class="card">
+                        <div class="card-body bg-light">
+                            <p>@Model.ReviewNotes</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="mt-4">
+                <h6 class="border-bottom pb-2 mb-3">Tài liệu đính kèm</h6>
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <p class="text-muted">Chức năng đính kèm tài liệu sẽ được cập nhật trong phiên bản tiếp theo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0"><i class="fas fa-route"></i> Tiến trình xử lý đơn</h5>
+        </div>
+        <div class="card-body" id="progressHistoryContainer">
+            @if (Model.ProgressSteps != null)
+            {
+                var steps = System.Text.Json.JsonSerializer.Deserialize<List<UTEScholarshipSystem.Models.ProgressStep>>(Model.ProgressSteps) ?? new List<UTEScholarshipSystem.Models.ProgressStep>();
+                @await Html.PartialAsync("_ProgressHistory", steps)
+            }
+            else
+            {
+                @await Html.PartialAsync("_ProgressHistory", new List<UTEScholarshipSystem.Models.ProgressStep>())
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Application Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">Xác nhận hủy đơn</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn hủy đơn xin học bổng này không?</p>
+                <p class="text-danger">Lưu ý: Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <form asp-action="CancelApplication" method="post">
+                    <input type="hidden" name="id" value="@Model.ApplicationId" />
+                    <button type="submit" class="btn btn-danger">Xác nhận hủy</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

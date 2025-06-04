@@ -1,0 +1,148 @@
+@model IEnumerable<UTEScholarshipSystem.Models.ScholarshipApplication>
+@{
+    ViewData["Title"] = "Lọc & Tìm kiếm nâng cao đơn xin học bổng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var allSteps = ViewBag.AllSteps as List<string>;
+    var allReviewers = ViewBag.AllReviewers as List<string>;
+    var allFaculties = ViewBag.AllFaculties as List<string>;
+    var allStatuses = ViewBag.AllStatuses as string[];
+}
+<div class="container-fluid">
+    <h1 class="mb-4"><i class="fas fa-filter"></i> Lọc & Tìm kiếm nâng cao đơn xin học bổng</h1>
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <form method="get" asp-action="AdvancedSearchApplications" class="row g-3 align-items-end">
+                <div class="col-md-2">
+                    <label class="form-label">Bước duyệt</label>
+                    <select name="step" class="form-select">
+                        <option value="">Tất cả</option>
+                        @foreach (var s in allSteps)
+                        {
+                            if ((ViewBag.Step as string) == s)
+                            {
+                                <option value="@s" selected>@s</option>
+                            }
+                            else
+                            {
+                                <option value="@s">@s</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Người duyệt</label>
+                    <select name="reviewer" class="form-select">
+                        <option value="">Tất cả</option>
+                        @foreach (var r in allReviewers)
+                        {
+                            if ((ViewBag.Reviewer as string) == r)
+                            {
+                                <option value="@r" selected>@r</option>
+                            }
+                            else
+                            {
+                                <option value="@r">@r</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Khoa</label>
+                    <select name="faculty" class="form-select">
+                        <option value="">Tất cả</option>
+                        @foreach (var f in allFaculties)
+                        {
+                            if ((ViewBag.Faculty as string) == f)
+                            {
+                                <option value="@f" selected>@f</option>
+                            }
+                            else
+                            {
+                                <option value="@f">@f</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Trạng thái</label>
+                    <select name="status" class="form-select">
+                        <option value="">Tất cả</option>
+                        @foreach (var st in allStatuses)
+                        {
+                            if ((ViewBag.Status as string) == st)
+                            {
+                                <option value="@st" selected>@st</option>
+                            }
+                            else
+                            {
+                                <option value="@st">@st</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Từ ngày</label>
+                    <input type="date" name="fromDate" value="@(ViewBag.FromDate != null ? ((DateTime)ViewBag.FromDate).ToString("yyyy-MM-dd") : "")" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Đến ngày</label>
+                    <input type="date" name="toDate" value="@(ViewBag.ToDate != null ? ((DateTime)ViewBag.ToDate).ToString("yyyy-MM-dd") : "")" class="form-control" />
+                </div>
+                <div class="col-md-12 text-end mt-3">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Lọc</button>
+                    <button type="button" class="btn btn-success ms-2"><i class="fas fa-file-excel"></i> Xuất Excel</button>
+                    <button type="button" class="btn btn-danger ms-2"><i class="fas fa-file-pdf"></i> Xuất PDF</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Sinh viên</th>
+                            <th>Khoa</th>
+                            <th>Học bổng</th>
+                            <th>Bước duyệt</th>
+                            <th>Người duyệt</th>
+                            <th>Ngày nộp</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var app in Model)
+                        {
+                            <tr>
+                                <td>@app.ApplicationId</td>
+                                <td>@app.Student.FullName</td>
+                                <td>@app.Student.Faculty</td>
+                                <td>@app.Scholarship.Name</td>
+                                <td>@app.ApprovalStep</td>
+                                <td>@app.ReviewedBy</td>
+                                <td>@app.ApplicationDate.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @switch (app.Status)
+                                    {
+                                        case UTEScholarshipSystem.Models.ApplicationStatus.Pending:
+                                            <span class="badge bg-warning">Chờ duyệt</span>
+                                            break;
+                                        case UTEScholarshipSystem.Models.ApplicationStatus.Approved:
+                                            <span class="badge bg-success">Đã duyệt</span>
+                                            break;
+                                        case UTEScholarshipSystem.Models.ApplicationStatus.Rejected:
+                                            <span class="badge bg-danger">Từ chối</span>
+                                            break;
+                                        default:
+                                            <span class="badge bg-secondary">Không xác định</span>
+                                            break;
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> 

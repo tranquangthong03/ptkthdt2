@@ -1,0 +1,59 @@
+@model UTEScholarshipSystem.Models.Scholarship
+@{
+    ViewData["Title"] = "Chi tiết học bổng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-4">
+    <h2 class="mb-4">Chi tiết học bổng</h2>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4>@Model.Name</h4>
+            <p><strong>Mô tả:</strong> @Model.Description</p>
+            <p><strong>Giá trị:</strong> @Model.Amount.ToString("N0") VND</p>
+            <p><strong>Số suất:</strong> @Model.Quantity</p>
+            <p><strong>GPA tối thiểu:</strong> @Model.MinGPA</p>
+            <p><strong>Năm học:</strong> @Model.AcademicYear</p>
+            <p><strong>Thời gian đăng ký:</strong> @Model.ApplicationStartDate:dd/MM/yyyy - @Model.ApplicationEndDate:dd/MM/yyyy</p>
+            <p><strong>Yêu cầu khác:</strong> @Model.AdditionalRequirements</p>
+            <p><strong>Trạng thái:</strong> @Model.Status</p>
+        </div>
+    </div>
+    <h5>Sinh viên đã đăng ký</h5>
+    @if (Model.ScholarshipApplications != null && Model.ScholarshipApplications.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã SV</th>
+                    <th>Họ tên</th>
+                    <th>GPA</th>
+                    <th>Ngày nộp</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var app in Model.ScholarshipApplications) {
+                <tr>
+                    <td>@app.Student?.StudentCode</td>
+                    <td>@app.Student?.FullName</td>
+                    <td>@app.GPAAtApplication</td>
+                    <td>@app.ApplicationDate.ToString("dd/MM/yyyy")</td>
+                    <td>@app.Status</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">Chưa có sinh viên đăng ký học bổng này.</div>
+    }
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.ScholarshipId" class="btn btn-warning">Sửa</a>
+            <a asp-action="Delete" asp-route-id="@Model.ScholarshipId" class="btn btn-danger">Xóa</a>
+        }
+    </div>
+</div> 

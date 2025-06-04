@@ -1,0 +1,31 @@
+@model UTEScholarshipSystem.Models.Scholarship
+@{
+    ViewData["Title"] = "Xóa học bổng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (!User.IsInRole("Admin"))
+{
+    <div class="alert alert-danger mt-4">Bạn không có quyền truy cập chức năng này.</div>
+    return;
+}
+<div class="container mt-4">
+    <h2 class="mb-4">Xóa học bổng</h2>
+    <div class="alert alert-danger">
+        <strong>Bạn có chắc chắn muốn xóa học bổng sau?</strong>
+    </div>
+    <dl class="row">
+        <dt class="col-sm-3">Tên học bổng</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+        <dt class="col-sm-3">Giá trị</dt>
+        <dd class="col-sm-9">@Model.Amount.ToString("N0") VND</dd>
+        <dt class="col-sm-3">Số suất</dt>
+        <dd class="col-sm-9">@Model.Quantity</dd>
+    </dl>
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="ScholarshipId" />
+        <div class="text-end">
+            <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+            <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        </div>
+    </form>
+</div> 

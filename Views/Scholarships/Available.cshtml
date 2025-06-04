@@ -1,0 +1,48 @@
+@model IEnumerable<UTEScholarshipSystem.Models.Scholarship>
+@{
+    ViewData["Title"] = "Học bổng đang mở";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-4">
+    <h2 class="mb-4"><i class="fas fa-list-alt"></i> Học bổng đang mở</h2>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        <strong>@item.Name</strong>
+                        <span class="badge bg-light text-success float-end">@item.Status.ToString()</span>
+                    </div>
+                    <div class="card-body">
+                        <p>@item.Description</p>
+                        <p><strong>@item.Amount.ToString("N0") VND</strong> <span class="text-muted">Giá trị</span></p>
+                        <p>@item.Quantity <span class="text-muted">Số suất</span></p>
+                        <p><i class="fas fa-calendar-alt"></i> Từ @item.ApplicationStartDate:dd/MM/yyyy đến @item.ApplicationEndDate:dd/MM/yyyy</p>
+                        <p><i class="fas fa-star"></i> GPA tối thiểu: <strong>@item.MinGPA</strong></p>
+                        @if (!string.IsNullOrEmpty(item.AdditionalRequirements))
+                        {
+                            <p class="text-warning"><i class="fas fa-exclamation-circle"></i> @item.AdditionalRequirements</p>
+                        }
+                    </div>
+                    <div class="card-footer bg-white">
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Details" asp-route-id="@item.ScholarshipId" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i> Chi tiết</a>
+                            @if (User.IsInRole("Student"))
+                            {
+                                <a asp-controller="Student" asp-action="ApplyScholarship" asp-route-id="@item.ScholarshipId" class="btn btn-outline-primary btn-sm"><i class="fas fa-paper-plane"></i> Đăng ký</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-graduation-cap fa-3x text-muted mb-3"></i>
+            <h4 class="text-muted">Hiện chưa có học bổng nào đang mở</h4>
+        </div>
+    }
+</div> 

@@ -1,0 +1,64 @@
+@{
+    ViewData["Title"] = "Báo cáo & Thống kê nâng cao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var byScholarship = ViewBag.ByScholarship as IEnumerable<dynamic>;
+    var byFaculty = ViewBag.ByFaculty as IEnumerable<dynamic>;
+    var byStatus = ViewBag.ByStatus as IEnumerable<dynamic>;
+}
+<div class="container-fluid">
+    <h1 class="mb-4"><i class="fas fa-chart-bar"></i> Báo cáo & Thống kê nâng cao</h1>
+    <div class="mb-3 text-end">
+        <button class="btn btn-success me-2"><i class="fas fa-file-excel"></i> Xuất Excel</button>
+        <button class="btn btn-danger"><i class="fas fa-file-pdf"></i> Xuất PDF</button>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">Theo học bổng</div>
+                <div class="card-body">
+                    <table class="table table-bordered table-sm">
+                        <thead><tr><th>Học bổng</th><th>Số đơn</th></tr></thead>
+                        <tbody>
+                        @foreach (var item in byScholarship)
+                        {
+                            <tr><td>@item.Scholarship</td><td>@item.Count</td></tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">Theo khoa</div>
+                <div class="card-body">
+                    <table class="table table-bordered table-sm">
+                        <thead><tr><th>Khoa</th><th>Số đơn</th></tr></thead>
+                        <tbody>
+                        @foreach (var item in byFaculty)
+                        {
+                            <tr><td>@item.Faculty</td><td>@item.Count</td></tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">Theo trạng thái</div>
+                <div class="card-body">
+                    <table class="table table-bordered table-sm">
+                        <thead><tr><th>Trạng thái</th><th>Số đơn</th></tr></thead>
+                        <tbody>
+                        @foreach (var item in byStatus)
+                        {
+                            <tr><td>@item.Status</td><td>@item.Count</td></tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

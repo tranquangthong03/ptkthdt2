@@ -1,0 +1,288 @@
+@model IEnumerable<UTEScholarshipSystem.Models.ScholarshipApplication>
+
+@{
+    ViewData["Title"] = "Quản lý đơn xin học bổng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mb-4">
+        <i class="fas fa-file-alt"></i> Quản lý đơn xin học bổng
+    </h1>
+
+    <div class="card">
+        <div class="card-header bg-light">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h5 class="mb-0">Danh sách đơn xin học bổng</h5>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex justify-content-end">
+                        <div class="btn-group">
+                            <a asp-controller="Admin" asp-action="ScholarshipApplications" class="btn @(string.IsNullOrEmpty(ViewBag.StatusFilter) ? "btn-primary" : "btn-outline-primary")">
+                                Tất cả
+                            </a>
+                            <a asp-controller="Admin" asp-action="ScholarshipApplications" asp-route-status="Pending" class="btn @(ViewBag.StatusFilter == "Pending" ? "btn-primary" : "btn-outline-primary")">
+                                Chờ duyệt
+                            </a>
+                            <a asp-controller="Admin" asp-action="ScholarshipApplications" asp-route-status="Approved" class="btn @(ViewBag.StatusFilter == "Approved" ? "btn-primary" : "btn-outline-primary")">
+                                Đã duyệt
+                            </a>
+                            <a asp-controller="Admin" asp-action="ScholarshipApplications" asp-route-status="Rejected" class="btn @(ViewBag.StatusFilter == "Rejected" ? "btn-primary" : "btn-outline-primary")">
+                                Từ chối
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover" id="applicationsTable">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Sinh viên</th>
+                            <th>Học bổng</th>
+                            <th>Ngày nộp</th>
+                            <th>Bước duyệt hiện tại</th>
+                            <th>Lịch sử duyệt</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var application in Model)
+                        {
+                            <tr>
+                                <td>@application.ApplicationId</td>
+                                <td>
+                                    <div>@application.Student.FullName</div>
+                                    <small class="text-muted">@application.Student.StudentCode</small>
+                                </td>
+                                <td>@application.Scholarship.Name</td>
+                                <td>@application.ApplicationDate.ToString("dd/MM/yyyy")</td>
+                                <td>@application.ApprovalStep</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#approvalHistoryModal_@application.ApplicationId">
+                                        Xem lịch sử
+                                    </button>
+                                    <!-- Modal hiển thị lịch sử duyệt -->
+                                    <div class="modal fade" id="approvalHistoryModal_@application.ApplicationId" tabindex="-1" aria-labelledby="approvalHistoryLabel_@application.ApplicationId" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="approvalHistoryLabel_@application.ApplicationId">Lịch sử duyệt đơn #@application.ApplicationId</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @if (!string.IsNullOrEmpty(application.ApprovalHistory))
+                                                    {
+                                                        var steps = System.Text.Json.JsonSerializer.Deserialize<List<UTEScholarshipSystem.Models.ApprovalStepHistory>>(application.ApprovalHistory) ?? new List<UTEScholarshipSystem.Models.ApprovalStepHistory>();
+                                                        <ul class="timeline">
+                                                            @foreach (var step in steps.OrderBy(s => s.Timestamp))
+                                                            {
+                                                                <li>
+                                                                    <strong>@step.Step</strong> - <span class="text-muted">@step.Timestamp.ToString("dd/MM/yyyy HH:mm")</span><br />
+                                                                    <span>Người duyệt: @step.ReviewedBy</span><br />
+                                                                    <span>Trạng thái: @step.Status</span><br />
+                                                                    @if (!string.IsNullOrEmpty(step.Note))
+                                                                    {
+                                                                        <span class="text-secondary small">@step.Note</span>
+                                                                    }
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="alert alert-info">Chưa có lịch sử duyệt.</div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @switch (application.Status)
+                                    {
+                                        case ApplicationStatus.Pending:
+                                            <span class="badge bg-warning">Chờ duyệt</span>
+                                            break;
+                                        case ApplicationStatus.Approved:
+                                            <span class="badge bg-success">Đã duyệt</span>
+                                            break;
+                                        case ApplicationStatus.Rejected:
+                                            <span class="badge bg-danger">Từ chối</span>
+                                            break;
+                                        default:
+                                            <span class="badge bg-secondary">Không xác định</span>
+                                            break;
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" 
+                                                data-bs-target="#applicationDetailModal" 
+                                                data-application-id="@application.ApplicationId">
+                                            <i class="fas fa-eye"></i> Chi tiết
+                                        </button>
+                                        @if (application.Status == ApplicationStatus.Pending)
+                                        {
+                                            <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" 
+                                                    data-bs-target="#reviewModal" 
+                                                    data-application-id="@application.ApplicationId"
+                                                    data-action="approve">
+                                                <i class="fas fa-check"></i> Duyệt
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" 
+                                                    data-bs-target="#reviewModal" 
+                                                    data-application-id="@application.ApplicationId"
+                                                    data-action="reject">
+                                                <i class="fas fa-times"></i> Từ chối
+                                            </button>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Application Detail Modal -->
+<div class="modal fade" id="applicationDetailModal" tabindex="-1" aria-labelledby="applicationDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="applicationDetailModalLabel">Chi tiết đơn xin học bổng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="application-details">
+                    <!-- Content will be loaded dynamically -->
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Review Application Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel">Duyệt đơn xin học bổng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-controller="Admin" asp-action="ReviewApplication" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="applicationId" name="applicationId" value="" />
+                    <input type="hidden" id="status" name="status" />
+                    <div class="mb-3">
+                        <label for="reviewNotes" class="form-label">Ghi chú</label>
+                        <textarea class="form-control" id="reviewNotes" name="reviewNotes" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="submitReview" name="submitReview">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#applicationsTable').DataTable({
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ dòng mỗi trang",
+                    "zeroRecords": "Không tìm thấy kết quả phù hợp",
+                    "info": "Hiển thị trang _PAGE_ trên _PAGES_",
+                    "infoEmpty": "Không có dữ liệu",
+                    "infoFiltered": "(lọc từ _MAX_ tổng số dòng)",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": "Tiếp",
+                        "previous": "Trước"
+                    }
+                },
+                "order": [[3, "desc"]] // Sort by application date
+            });
+            
+            // Handle review modal
+            $('#reviewModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var applicationId = button.data('application-id');
+                var action = button.data('action');
+                
+                var modal = $(this);
+                modal.find('#applicationId').val(applicationId);
+                
+                if (action === 'approve') {
+                    modal.find('.modal-title').text('Duyệt đơn xin học bổng');
+                    modal.find('#status').val('Approved');
+                    modal.find('#submitReview').removeClass('btn-danger').addClass('btn-success').text('Duyệt');
+                } else {
+                    modal.find('.modal-title').text('Từ chối đơn xin học bổng');
+                    modal.find('#status').val('Rejected');
+                    modal.find('#submitReview').removeClass('btn-success').addClass('btn-danger').text('Từ chối');
+                }
+            });
+            
+            // Handle application detail modal
+            $('#applicationDetailModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var applicationId = button.data('application-id');
+                
+                // Load application details via AJAX
+                // This is just a placeholder - you'll need to implement the actual AJAX call
+                $('.application-details').html('<div class="text-center"><p>Đang tải thông tin đơn #' + applicationId + '...</p></div>');
+                
+                // Simulating loading data
+                setTimeout(function() {
+                    var content = '<div class="row">';
+                    content += '<div class="col-md-6"><h6>Thông tin sinh viên</h6><hr>';
+                    content += '<p><strong>Họ tên:</strong> [Tên sinh viên]</p>';
+                    content += '<p><strong>MSSV:</strong> [Mã số sinh viên]</p>';
+                    content += '<p><strong>Email:</strong> [Email]</p>';
+                    content += '<p><strong>Lớp:</strong> [Lớp]</p>';
+                    content += '</div>';
+                    content += '<div class="col-md-6"><h6>Thông tin học bổng</h6><hr>';
+                    content += '<p><strong>Tên học bổng:</strong> [Tên học bổng]</p>';
+                    content += '<p><strong>Giá trị:</strong> [Giá trị]</p>';
+                    content += '<p><strong>Ngày nộp đơn:</strong> [Ngày nộp]</p>';
+                    content += '<p><strong>Trạng thái:</strong> [Trạng thái]</p>';
+                    content += '</div></div>';
+                    
+                    content += '<div class="mt-3"><h6>Nội dung đơn</h6><hr>';
+                    content += '<p>[Nội dung đơn xin học bổng của sinh viên...]</p>';
+                    content += '</div>';
+                    
+                    content += '<div class="mt-3"><h6>Tài liệu đính kèm</h6><hr>';
+                    content += '<ul>';
+                    content += '<li><a href="#">Bảng điểm.pdf</a></li>';
+                    content += '<li><a href="#">Chứng chỉ tiếng Anh.pdf</a></li>';
+                    content += '</ul></div>';
+                    
+                    $('.application-details').html(content);
+                }, 1000);
+            });
+        });
+    </script>
+} 

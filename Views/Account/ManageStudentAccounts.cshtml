@@ -1,0 +1,185 @@
+@model IEnumerable<object>
+
+@{
+    ViewData["Title"] = "Quản lý tài khoản sinh viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mb-4">
+        <i class="fas fa-users-cog"></i> Quản lý tài khoản sinh viên
+    </h1>
+
+    <div class="card">
+        <div class="card-header bg-light">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Danh sách tài khoản sinh viên</h5>
+                <a asp-controller="Account" asp-action="CreateStudentAccount" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Tạo tài khoản mới
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover" id="studentAccountsTable">
+                    <thead>
+                        <tr>
+                            <th>Tên đăng nhập</th>
+                            <th>Mã sinh viên</th>
+                            <th>Họ tên</th>
+                            <th>Email</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (dynamic account in Model)
+                            {
+                                var user = account.User;
+                                var student = account.Student;
+                                
+                                <tr>
+                                    <td>@user.UserName</td>
+                                    <td>@(student?.StudentCode ?? "N/A")</td>
+                                    <td>@user.FullName</td>
+                                    <td>@user.Email</td>
+                                    <td>
+                                        @if (user.IsActive)
+                                        {
+                                            <span class="badge bg-success">Đang hoạt động</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Bị khóa</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-primary" 
+                                                    data-bs-toggle="modal" data-bs-target="#resetPasswordModal" 
+                                                    data-user-id="@user.Id" data-username="@user.UserName">
+                                                <i class="fas fa-key"></i> Đặt lại mật khẩu
+                                            </button>
+                                            <form asp-controller="Admin" asp-action="ToggleUserStatus" method="post" class="d-inline">
+                                                <input type="hidden" name="userId" value="@user.Id">
+                                                <button type="submit" class="btn btn-sm @(user.IsActive ? "btn-outline-warning" : "btn-outline-success")">
+                                                    @if (user.IsActive)
+                                                    {
+                                                        <i class="fas fa-lock"></i>
+                                                        <span>Khóa</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fas fa-lock-open"></i>
+                                                        <span>Mở khóa</span>
+                                                    }
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    <div class="alert alert-info mb-0">
+                                        <i class="fas fa-info-circle"></i> Chưa có tài khoản sinh viên nào được tạo.
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reset Password Modal -->
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resetPasswordModalLabel">Đặt lại mật khẩu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="ResetPassword" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="userId" name="userId">
+                    <p>Bạn đang đặt lại mật khẩu cho tài khoản <strong id="userNameDisplay"></strong></p>
+                    <div class="form-group mb-3">
+                        <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required minlength="6">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required minlength="6">
+                        <div id="passwordMismatch" class="text-danger d-none">Mật khẩu xác nhận không khớp</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="resetPasswordBtn">Đặt lại mật khẩu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#studentAccountsTable').DataTable({
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ dòng mỗi trang",
+                    "zeroRecords": "Không tìm thấy kết quả phù hợp",
+                    "info": "Hiển thị trang _PAGE_ trên _PAGES_",
+                    "infoEmpty": "Không có dữ liệu",
+                    "infoFiltered": "(lọc từ _MAX_ tổng số dòng)",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": "Tiếp",
+                        "previous": "Trước"
+                    }
+                }
+            });
+            
+            // Handle reset password modal
+            $('#resetPasswordModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var userId = button.data('user-id');
+                var username = button.data('username');
+                var modal = $(this);
+                modal.find('#userId').val(userId);
+                modal.find('#userNameDisplay').text(username);
+            });
+            
+            // Password confirmation validation
+            $('#confirmPassword').on('input', function() {
+                if ($(this).val() !== $('#newPassword').val()) {
+                    $('#passwordMismatch').removeClass('d-none');
+                    $('#resetPasswordBtn').prop('disabled', true);
+                } else {
+                    $('#passwordMismatch').addClass('d-none');
+                    $('#resetPasswordBtn').prop('disabled', false);
+                }
+            });
+            
+            $('#newPassword').on('input', function() {
+                if ($('#confirmPassword').val() && $(this).val() !== $('#confirmPassword').val()) {
+                    $('#passwordMismatch').removeClass('d-none');
+                    $('#resetPasswordBtn').prop('disabled', true);
+                } else if ($('#confirmPassword').val()) {
+                    $('#passwordMismatch').addClass('d-none');
+                    $('#resetPasswordBtn').prop('disabled', false);
+                }
+            });
+        });
+    </script>
+} 

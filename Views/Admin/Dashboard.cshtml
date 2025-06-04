@@ -1,0 +1,223 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mb-4">
+        <i class="fas fa-tachometer-alt"></i> Dashboard Quản trị
+    </h1>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card bg-primary text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Tổng số sinh viên</h6>
+                            <h2 class="mb-0">@ViewBag.Stats.TotalStudents</h2>
+                        </div>
+                        <div>
+                            <i class="fas fa-users fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-controller="Students" asp-action="Index">Xem chi tiết</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-success text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Học bổng đang mở</h6>
+                            <h2 class="mb-0">@ViewBag.Stats.ActiveScholarships</h2>
+                        </div>
+                        <div>
+                            <i class="fas fa-graduation-cap fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-controller="Scholarships" asp-action="Index">Xem chi tiết</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-warning text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Đơn đang chờ duyệt</h6>
+                            <h2 class="mb-0">@ViewBag.Stats.PendingApplications</h2>
+                        </div>
+                        <div>
+                            <i class="fas fa-clock fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-controller="Admin" asp-action="ScholarshipApplications" asp-route-status="Pending">Xem chi tiết</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-info text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Tổng số tài khoản SV</h6>
+                            <h2 class="mb-0">@ViewBag.Stats.StudentAccounts.Count</h2>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-graduate fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-controller="Account" asp-action="ManageStudentAccounts">Xem chi tiết</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-secondary text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Quản lý vai trò</h6>
+                            <h2 class="mb-0"><i class="fas fa-user-tag"></i></h2>
+                        </div>
+                        <div>
+                            <i class="fas fa-users-cog fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-controller="Admin" asp-action="ManageRoles">Xem chi tiết</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-secondary text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Báo cáo & Thống kê</h6>
+                            <h2 class="mb-0"><i class="fas fa-chart-bar"></i></h2>
+                        </div>
+                        <div>
+                            <i class="fas fa-chart-pie fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a href="/Admin/AdvancedStatistics" class="small text-white stretched-link">Xem báo cáo</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-primary text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title">Lọc & Tìm kiếm nâng cao</h6>
+                            <h2 class="mb-0"><i class="fas fa-filter"></i></h2>
+                        </div>
+                        <div>
+                            <i class="fas fa-search fa-3x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a href="/Admin/AdvancedSearchApplications" class="small text-white stretched-link">Lọc & Tìm kiếm</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Applications -->
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0"><i class="fas fa-file-alt"></i> Đơn xin học bổng gần đây</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã SV</th>
+                            <th>Họ tên</th>
+                            <th>Học bổng</th>
+                            <th>Ngày nộp</th>
+                            <th>Trạng thái</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.RecentApplications != null && ViewBag.RecentApplications.Count > 0)
+                        {
+                            @foreach (var application in ViewBag.RecentApplications)
+                            {
+                                <tr>
+                                    <td>@application.Student.StudentCode</td>
+                                    <td>@application.Student.FullName</td>
+                                    <td>@application.Scholarship.Name</td>
+                                    <td>@application.ApplicationDate.ToString("dd/MM/yyyy")</td>
+                                    <td>
+                                        @switch (application.Status)
+                                        {
+                                            case ApplicationStatus.Pending:
+                                                <span class="badge bg-warning">Chờ duyệt</span>
+                                                break;
+                                            case ApplicationStatus.Approved:
+                                                <span class="badge bg-success">Đã duyệt</span>
+                                                break;
+                                            case ApplicationStatus.Rejected:
+                                                <span class="badge bg-danger">Từ chối</span>
+                                                break;
+                                            default:
+                                                <span class="badge bg-secondary">Không xác định</span>
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye"></i> Chi tiết
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">Không có đơn xin học bổng nào gần đây</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <a asp-controller="Admin" asp-action="ScholarshipApplications" class="btn btn-primary">
+                <i class="fas fa-list"></i> Xem tất cả đơn
+            </a>
+        </div>
+    </div>
+</div> 

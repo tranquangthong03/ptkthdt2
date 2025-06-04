@@ -1,0 +1,21 @@
+@model List<UTEScholarshipSystem.Models.ProgressStep>
+
+<div class="timeline">
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var step in Model.OrderBy(s => s.Timestamp))
+        {
+            <div class="timeline-item mb-3">
+                <div><strong>@step.Status</strong> <span class="text-muted">(@step.Timestamp.ToString("dd/MM/yyyy HH:mm"))</span></div>
+                @if (!string.IsNullOrEmpty(step.Note))
+                {
+                    <div class="text-secondary small">@step.Note</div>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-info">Chưa có tiến trình xử lý nào.</div>
+    }
+</div> 

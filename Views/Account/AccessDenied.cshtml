@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Từ chối truy cập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Từ chối truy cập</h4>
+                </div>
+                <div class="card-body text-center">
+                    <i class="fas fa-lock fa-5x text-danger mb-4"></i>
+                    <h4>Bạn không có quyền truy cập vào trang này</h4>
+                    <p class="mb-4">Để truy cập trang này, bạn cần có quyền hạn phù hợp. Vui lòng liên hệ quản trị viên nếu bạn cho rằng đây là lỗi.</p>
+                    <div class="mt-4">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+                            <i class="fas fa-home"></i> Quay về trang chủ
+                        </a>
+                    </div>
+                </div>
+                <div class="card-footer bg-light text-center">
+                    <small class="text-muted">Nếu bạn cho rằng đây là lỗi, vui lòng liên hệ quản trị viên hệ thống</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
