@@ -115,12 +115,12 @@ namespace UTEScholarshipSystem.Controllers
         // POST: Admin/ReviewApplication
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ReviewApplication(int applicationId, string status, string? reviewNotes)
+        public async Task<IActionResult> ReviewApplication(int id, string status, string? reviewNotes)
         {
             var application = await _context.ScholarshipApplications
                 .Include(a => a.Student)
                 .Include(a => a.Scholarship)
-                .FirstOrDefaultAsync(a => a.ApplicationId == applicationId);
+                .FirstOrDefaultAsync(a => a.ApplicationId == id);
             if (application == null)
             {
                 TempData["ErrorMessage"] = "Không tìm thấy đơn xin học bổng.";
