@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\WORK SPACE\\dkihocbong_ute\\UTEScholarshipSystem\\UTEScholarshipSystem.csproj": {}
+    "E:\\WORK SPACE\\demo_quanlyhocbong\\ptkthdt2\\UTEScholarshipSystem.csproj": {}
   },
   "projects": {
-    "E:\\WORK SPACE\\dkihocbong_ute\\UTEScholarshipSystem\\UTEScholarshipSystem.csproj": {
+    "E:\\WORK SPACE\\demo_quanlyhocbong\\ptkthdt2\\UTEScholarshipSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\WORK SPACE\\dkihocbong_ute\\UTEScholarshipSystem\\UTEScholarshipSystem.csproj",
+        "projectUniqueName": "E:\\WORK SPACE\\demo_quanlyhocbong\\ptkthdt2\\UTEScholarshipSystem.csproj",
         "projectName": "UTEScholarshipSystem",
-        "projectPath": "E:\\WORK SPACE\\dkihocbong_ute\\UTEScholarshipSystem\\UTEScholarshipSystem.csproj",
+        "projectPath": "E:\\WORK SPACE\\demo_quanlyhocbong\\ptkthdt2\\UTEScholarshipSystem.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "E:\\WORK SPACE\\dkihocbong_ute\\UTEScholarshipSystem\\obj\\",
+        "outputPath": "E:\\WORK SPACE\\demo_quanlyhocbong\\ptkthdt2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

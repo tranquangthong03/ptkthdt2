@@ -17,145 +17,165 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = UTEScholarshipSystem
 build_property.RootNamespace = UTEScholarshipSystem
-build_property.ProjectDir = E:\WORK SPACE\dkihocbong_ute\UTEScholarshipSystem\
+build_property.ProjectDir = E:\WORK SPACE\demo_quanlyhocbong\ptkthdt2\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = E:\WORK SPACE\dkihocbong_ute\UTEScholarshipSystem
+build_property.MSBuildProjectDirectory = E:\WORK SPACE\demo_quanlyhocbong\ptkthdt2
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Account/AccessDenied.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Account/CreateStudentAccount.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Account/CreateSponsorAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDcmVhdGVTcG9uc29yQWNjb3VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Account/CreateStudentAccount.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDcmVhdGVTdHVkZW50QWNjb3VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Account/Login.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Account/CreateTeacherAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDcmVhdGVUZWFjaGVyQWNjb3VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Account/ManageStudentAccounts.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Account/ManageStudentAccounts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxNYW5hZ2VTdHVkZW50QWNjb3VudHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Admin/AdvancedSearchApplications.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Admin/AdvancedSearchApplications.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWR2YW5jZWRTZWFyY2hBcHBsaWNhdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Admin/AdvancedStatistics.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Admin/AdvancedStatistics.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWR2YW5jZWRTdGF0aXN0aWNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Admin/Dashboard.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Admin/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Admin/ManageRoles.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Admin/ManageRoles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlUm9sZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Admin/ManageUsers.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Admin/ManageUsers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Admin/ScholarshipApplications.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Admin/ScholarshipApplications.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU2Nob2xhcnNoaXBBcHBsaWNhdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Admin/Statistics.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Admin/Statistics.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3RhdGlzdGljcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Home/Index.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Home/Privacy.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Scholarships/Available.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Scholarships/Available.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Nob2xhcnNoaXBzXEF2YWlsYWJsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Scholarships/Create.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Scholarships/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Nob2xhcnNoaXBzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Scholarships/Delete.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Scholarships/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Nob2xhcnNoaXBzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Scholarships/Details.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Scholarships/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Nob2xhcnNoaXBzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Scholarships/Edit.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Scholarships/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Nob2xhcnNoaXBzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Scholarships/Index.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Scholarships/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Nob2xhcnNoaXBzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Scholarships/Search.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Scholarships/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Nob2xhcnNoaXBzXFNlYXJjaC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Shared/Error.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Students/Create.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Students/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Students/Index.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Students/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Students/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Students/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Students/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Student/ApplicationDetails.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Student/ApplicationDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxBcHBsaWNhdGlvbkRldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Student/ApplyScholarship.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Student/ApplyScholarship.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxBcHBseVNjaG9sYXJzaGlwLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Student/Dashboard.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Student/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Student/MyApplications.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Student/MyApplications.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxNeUFwcGxpY2F0aW9ucy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Student/Profile.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Student/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Student/_ProgressHistory.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Student/_ProgressHistory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxfUHJvZ3Jlc3NIaXN0b3J5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/_ViewImports.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/_ViewStart.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK SPACE/dkihocbong_ute/UTEScholarshipSystem/Views/Shared/_Layout.cshtml]
+[E:/WORK SPACE/demo_quanlyhocbong/ptkthdt2/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-97dc2g0m8p

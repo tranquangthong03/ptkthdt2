@@ -186,7 +186,7 @@
                 <h5 class="modal-title" id="reviewModalLabel">Duyệt đơn xin học bổng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form asp-controller="Admin" asp-action="ReviewApplication" method="post">
+            <form asp-controller="Admin" asp-action="ReviewApplication" method="post" onsubmit="return checkApplicationId();">
                 <div class="modal-body">
                     <input type="hidden" id="applicationId" name="applicationId" value="" />
                     <input type="hidden" id="status" name="status" />
@@ -194,6 +194,7 @@
                         <label for="reviewNotes" class="form-label">Ghi chú</label>
                         <textarea class="form-control" id="reviewNotes" name="reviewNotes" rows="4"></textarea>
                     </div>
+                    <div id="applicationIdWarning" class="alert alert-danger d-none">Không xác định được mã đơn xin học bổng!</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -283,6 +284,16 @@
                     $('.application-details').html(content);
                 }, 1000);
             });
+
+            function checkApplicationId() {
+                var appId = document.getElementById('applicationId').value;
+                if (!appId) {
+                    document.getElementById('applicationIdWarning').classList.remove('d-none');
+                    return false;
+                }
+                document.getElementById('applicationIdWarning').classList.add('d-none');
+                return true;
+            }
         });
     </script>
 } 

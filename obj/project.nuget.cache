@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O6v0thAca5Q=",
+  "dgSpecHash": "yj5i6tR8iK8=",
   "success": true,
-  "projectFilePath": "E:\\WORK SPACE\\dkihocbong_ute\\UTEScholarshipSystem\\UTEScholarshipSystem.csproj",
+  "projectFilePath": "E:\\WORK SPACE\\demo_quanlyhocbong\\ptkthdt2\\UTEScholarshipSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LENOVO\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
