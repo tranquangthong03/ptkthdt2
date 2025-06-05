@@ -52,7 +52,7 @@ namespace UTEScholarshipSystem.Controllers
         // POST: Students/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentCode,FullName,Email,PhoneNumber,DateOfBirth,Address,AcademicYear,Major,Class,GPA")] Student student)
+        public async Task<IActionResult> Create([Bind("StudentCode,FullName,Email,PhoneNumber,DateOfBirth,Gender,Address,AcademicYear,Faculty,Major,Class,GPA")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace UTEScholarshipSystem.Controllers
         // POST: Students/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudentId,StudentCode,FullName,Email,PhoneNumber,DateOfBirth,Address,AcademicYear,Major,Class,GPA,CreatedAt")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentId,StudentCode,FullName,Email,PhoneNumber,DateOfBirth,Gender,Address,AcademicYear,Faculty,Major,Class,GPA,CreatedAt")] Student student)
         {
             if (id != student.StudentId)
             {

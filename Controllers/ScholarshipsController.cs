@@ -43,6 +43,7 @@ namespace UTEScholarshipSystem.Controllers
         }
 
         // GET: Scholarships/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -51,6 +52,7 @@ namespace UTEScholarshipSystem.Controllers
         // POST: Scholarships/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Name,Description,Amount,Quantity,MinGPA,ApplicationStartDate,ApplicationEndDate,AcademicYear,AdditionalRequirements,Status")] Scholarship scholarship)
         {
             if (ModelState.IsValid)
@@ -65,6 +67,7 @@ namespace UTEScholarshipSystem.Controllers
         }
 
         // GET: Scholarships/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +86,7 @@ namespace UTEScholarshipSystem.Controllers
         // POST: Scholarships/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("ScholarshipId,Name,Description,Amount,Quantity,MinGPA,ApplicationStartDate,ApplicationEndDate,AcademicYear,AdditionalRequirements,Status,CreatedAt")] Scholarship scholarship)
         {
             if (id != scholarship.ScholarshipId)
@@ -115,6 +119,7 @@ namespace UTEScholarshipSystem.Controllers
         }
 
         // GET: Scholarships/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +140,7 @@ namespace UTEScholarshipSystem.Controllers
         // POST: Scholarships/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var scholarship = await _context.Scholarships.FindAsync(id);

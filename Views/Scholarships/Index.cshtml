@@ -7,6 +7,9 @@
 
 <div class="container mt-4">
     <h2 class="mb-4"><i class="fas fa-graduation-cap"></i> Danh sách học bổng</h2>
+    <div class="mb-4 text-center">
+        <img src="https://source.unsplash.com/featured/?scholarship" alt="Scholarships" class="img-fluid rounded fade-in" style="max-height:250px;" />
+    </div>
     <div class="d-flex justify-content-between mb-3">
         <div>
             @* Chức năng tìm kiếm, lọc *@
@@ -20,7 +23,7 @@
         @foreach (var item in Model)
         {
             <div class="col-md-4 mb-4">
-                <div class="card h-100 border-success">
+                <div class="card h-100 border-success fade-in">
                     <div class="card-header bg-success text-white">
                         <strong>@item.Name</strong>
                         <span class="badge bg-light text-success float-end">@item.Status.ToString()</span>

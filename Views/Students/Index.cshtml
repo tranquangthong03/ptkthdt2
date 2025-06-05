@@ -12,6 +12,10 @@
         </a>
     </div>
 
+    <div class="mb-4 text-center">
+        <img src="https://source.unsplash.com/featured/?students" alt="Students" class="img-fluid rounded fade-in" style="max-height:250px;" />
+    </div>
+
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -30,7 +34,7 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
+                            <tr class="fade-in">
                                 <td>
                                     <span class="badge bg-info">@Html.DisplayFor(modelItem => item.StudentCode)</span>
                                 </td>
