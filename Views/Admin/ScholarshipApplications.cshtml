@@ -142,6 +142,11 @@
                                                 <i class="fas fa-times"></i> Từ chối
                                             </button>
                                         }
+                                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" 
+                                                data-bs-target="#deleteModal" 
+                                                data-application-id="@application.ApplicationId">
+                                            <i class="fas fa-trash"></i> Xóa
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -185,8 +190,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="reviewModalLabel">Duyệt đơn xin học bổng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form asp-controller="Admin" asp-action="ReviewApplication" method="post" onsubmit="return checkApplicationId();">
+            </div>            <form asp-controller="Admin" asp-action="ReviewApplication" method="post" onsubmit="return checkApplicationId();">
                 <div class="modal-body">
                     <input type="hidden" id="applicationId" name="id" value="" />
                     <input type="hidden" id="status" name="status" />
@@ -195,10 +199,36 @@
                         <textarea class="form-control" id="reviewNotes" name="reviewNotes" rows="4"></textarea>
                     </div>
                     <div id="applicationIdWarning" class="alert alert-danger d-none">Không xác định được mã đơn xin học bổng!</div>
+                    <div class="alert alert-info">
+                        <small>Mã đơn: <span id="displayApplicationId">-</span></small>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     <button type="submit" class="btn btn-primary" id="submitReview" name="submitReview">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Application Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xóa đơn xin học bổng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-controller="Admin" asp-action="DeleteApplication" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="deleteApplicationId" name="applicationId" value="" />
+                    <p>Bạn có chắc chắn muốn xóa đơn xin học bổng này không?</p>
+                    <p class="text-danger">Hành động này không thể hoàn tác.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
                 </div>
             </form>
         </div>
@@ -225,16 +255,14 @@
                 },
                 "order": [[3, "desc"]] // Sort by application date
             });
-            
             // Handle review modal
             $('#reviewModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
                 var applicationId = button.data('application-id');
                 var action = button.data('action');
-                
                 var modal = $(this);
                 modal.find('#applicationId').val(applicationId);
-                
+                modal.find('#displayApplicationId').text(applicationId || 'Không xác định');
                 if (action === 'approve') {
                     modal.find('.modal-title').text('Duyệt đơn xin học bổng');
                     modal.find('#status').val('Approved');
@@ -245,17 +273,11 @@
                     modal.find('#submitReview').removeClass('btn-success').addClass('btn-danger').text('Từ chối');
                 }
             });
-            
             // Handle application detail modal
             $('#applicationDetailModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
                 var applicationId = button.data('application-id');
-                
-                // Load application details via AJAX
-                // This is just a placeholder - you'll need to implement the actual AJAX call
                 $('.application-details').html('<div class="text-center"><p>Đang tải thông tin đơn #' + applicationId + '...</p></div>');
-                
-                // Simulating loading data
                 setTimeout(function() {
                     var content = '<div class="row">';
                     content += '<div class="col-md-6"><h6>Thông tin sinh viên</h6><hr>';
@@ -270,30 +292,33 @@
                     content += '<p><strong>Ngày nộp đơn:</strong> [Ngày nộp]</p>';
                     content += '<p><strong>Trạng thái:</strong> [Trạng thái]</p>';
                     content += '</div></div>';
-                    
                     content += '<div class="mt-3"><h6>Nội dung đơn</h6><hr>';
                     content += '<p>[Nội dung đơn xin học bổng của sinh viên...]</p>';
                     content += '</div>';
-                    
                     content += '<div class="mt-3"><h6>Tài liệu đính kèm</h6><hr>';
                     content += '<ul>';
                     content += '<li><a href="#">Bảng điểm.pdf</a></li>';
                     content += '<li><a href="#">Chứng chỉ tiếng Anh.pdf</a></li>';
                     content += '</ul></div>';
-                    
                     $('.application-details').html(content);
                 }, 1000);
             });
-
-            function checkApplicationId() {
-                var appId = document.getElementById('applicationId').value;
-                if (!appId) {
-                    document.getElementById('applicationIdWarning').classList.remove('d-none');
-                    return false;
-                }
-                document.getElementById('applicationIdWarning').classList.add('d-none');
-                return true;
-            }
+            // Handle delete modal
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var applicationId = button.data('application-id');
+                var modal = $(this);
+                modal.find('#deleteApplicationId').val(applicationId);
+            });
         });
+        function checkApplicationId() {
+            var appId = document.getElementById('applicationId').value;
+            if (!appId || appId === '') {
+                document.getElementById('applicationIdWarning').classList.remove('d-none');
+                return false;
+            }
+            document.getElementById('applicationIdWarning').classList.add('d-none');
+            return true;
+        }
     </script>
 } 

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UTEScholarshipSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+064baf78bac8ee0f67326774a5954095717e0a32")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62eef62a770936c77820085bc8e7b991e8c75dce")]
 [assembly: System.Reflection.AssemblyProductAttribute("UTEScholarshipSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UTEScholarshipSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

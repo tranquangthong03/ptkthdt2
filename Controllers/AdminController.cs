@@ -416,5 +416,55 @@ namespace UTEScholarshipSystem.Controllers
             }
             return RedirectToAction("ManageRoles");
         }
+
+        // GET: Admin/SeedTestData - For testing purposes only
+        [HttpGet]
+        public async Task<IActionResult> SeedTestData()
+        {
+            try
+            {
+                // Check if we already have test data
+                var existingApplications = await _context.ScholarshipApplications.CountAsync();
+                if (existingApplications > 0)
+                {
+                    TempData["InfoMessage"] = $"Đã có {existingApplications} đơn xin học bổng trong hệ thống.";
+                    return RedirectToAction("ScholarshipApplications");
+                }
+
+                // Get a student and scholarship for testing
+                var student = await _context.Students.FirstOrDefaultAsync();
+                var scholarship = await _context.Scholarships.FirstOrDefaultAsync();
+
+                if (student == null || scholarship == null)
+                {
+                    TempData["ErrorMessage"] = "Cần có ít nhất 1 sinh viên và 1 học bổng để tạo dữ liệu test.";
+                    return RedirectToAction("Dashboard");
+                }
+
+                // Create test scholarship application
+                var testApplication = new ScholarshipApplication
+                {
+                    StudentId = student.StudentId,
+                    ScholarshipId = scholarship.ScholarshipId,
+                    ApplicationDate = DateTime.Now.AddDays(-5),
+                    ApplicationReason = "Đây là đơn xin học bổng test để kiểm tra chức năng duyệt/từ chối.",
+                    Status = ApplicationStatus.Pending,
+                    ApprovalStep = "Bước 1: Xét duyệt hồ sơ",
+                    CreatedAt = DateTime.Now.AddDays(-5),
+                    UpdatedAt = DateTime.Now.AddDays(-5)
+                };
+
+                _context.ScholarshipApplications.Add(testApplication);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Đã tạo dữ liệu test thành công!";
+                return RedirectToAction("ScholarshipApplications");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Lỗi tạo dữ liệu test: {ex.Message}";
+                return RedirectToAction("Dashboard");
+            }
+        }
     }
-} 
+}
